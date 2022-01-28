@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Realtime Face Recognition App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+        <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
+    
+        <link rel="stylesheet" type="text/css" href="style.css">    
+    </head>
+    <body>
+        <center>
+             <div id="Rainbow">
+                <h1 style="color: red;">Realtime Image Identification</h1>
+                <hr>
+                <div style="background-color: white; width: 800px; margin-right: 10px; border-radius: 20px; margin-bottom: 30px;">
+               <h2>
+                   Model is Trained on
+               </h2>
+               <button class="btn">Mother | Father | Brother | Me</button>
+                </div>
+             </div>
+             <br><br>
+            
+             <div class="object_accurancy_object">
+                 <div>
+                 <p class="result_para_tag">Object :
+                     <span id="result_object_name"></span>
+                 </p>
+                </div>
+                <div>
+                 <p class="result_para_tag">Accurancy :
+                    <span id="result_object_accurancy"></span>
+                 </p>
+                </div>   
+             </div>
+            </center>
+             <div id="copy_right_footer">
+                <b style="color: black;"> Developed By -<b style="color: white;"> WhitehatJr Team  </b><img style="height: 20px; width: 20px;" src="data:image/png;base64,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"></b>
+             </div>
+
+<script src="main.js"></script>
+    </body>
+</html>
